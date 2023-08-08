@@ -1,0 +1,26 @@
+PROXYSG
+
+Production
+github.com is allowed in Shared Object > Allowed URL List with SSL
+This was added by Mark Tugbo in an old change (S158279) 
+This is allowing everyone to access github.com and other github.com links
+
+Option 1.
+If we remove github.com from Allowed URL list with SSL this will prompt user to request for user proxy access via getit (Service: GitHub User Proxy Access)
+(currently no members exist in this github allow group as above rule is bypassing - do we need this?)
+
+Option 2.
+Changes made in QA:
+1. Add github.com/login to banned_URL_list
+2. VPM - disabled Github user proxy access under web access layer
+3. removed github user proxy access from deny_restricted_catagory
+(this will allow anyone to get to github.com and disallow them from accessing github.com/login)
+
+Tested:
+Pushed Policy
+tested github.com - allowed
+tested gitrhub.com/community - allowed
+tested github.com/login - blocked
+
+Zscaler
+Add github.com/login to ASB - CSIRT Blocked Sites under URL catagories in ZIA
